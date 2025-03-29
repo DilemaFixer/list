@@ -1,0 +1,112 @@
+[32m[INFO][0m [29.03.2025 21:27:11] [test.c:54] : Starting list test
+[32m[INFO][0m [29.03.2025 21:27:11] [test.c:58] : Created new list with capacity 10
+[34m[DEBUG][0m [29.03.2025 21:27:11] [test.c:64] : Added value 0 to list
+[34m[DEBUG][0m [29.03.2025 21:27:11] [test.c:64] : Added value 10 to list
+[34m[DEBUG][0m [29.03.2025 21:27:11] [test.c:64] : Added value 20 to list
+[34m[DEBUG][0m [29.03.2025 21:27:11] [test.c:64] : Added value 30 to list
+[34m[DEBUG][0m [29.03.2025 21:27:11] [test.c:64] : Added value 40 to list
+[34m[DEBUG][0m [29.03.2025 21:27:11] [test.c:64] : Added value 50 to list
+[34m[DEBUG][0m [29.03.2025 21:27:11] [test.c:64] : Added value 60 to list
+[34m[DEBUG][0m [29.03.2025 21:27:11] [test.c:64] : Added value 70 to list
+[34m[DEBUG][0m [29.03.2025 21:27:11] [test.c:64] : Added value 80 to list
+[34m[DEBUG][0m [29.03.2025 21:27:11] [test.c:64] : Added value 90 to list
+[34m[DEBUG][0m [29.03.2025 21:27:11] [test.c:64] : Added value 100 to list
+[34m[DEBUG][0m [29.03.2025 21:27:11] [test.c:64] : Added value 110 to list
+[34m[DEBUG][0m [29.03.2025 21:27:11] [test.c:64] : Added value 120 to list
+[34m[DEBUG][0m [29.03.2025 21:27:11] [test.c:64] : Added value 130 to list
+[34m[DEBUG][0m [29.03.2025 21:27:11] [test.c:64] : Added value 140 to list
+[32m[INFO][0m [29.03.2025 21:27:11] [test.c:67] : List capacity after additions: 20
+List contents (15 items):
+[0]: 0
+[1]: 10
+[2]: 20
+[3]: 30
+[4]: 40
+[5]: 50
+[6]: 60
+[7]: 70
+[8]: 80
+[9]: 90
+[10]: 100
+[11]: 110
+[12]: 120
+[13]: 130
+[14]: 140
+
+[32m[INFO][0m [29.03.2025 21:27:11] [test.c:71] : Testing find method with value 50
+[32m[INFO][0m [29.03.2025 21:27:11] [test.c:75] : Found item with value 50
+[32m[INFO][0m [29.03.2025 21:27:11] [test.c:81] : Testing find method with index 7
+[32m[INFO][0m [29.03.2025 21:27:11] [test.c:85] : Found item at index 7 with value 70
+[32m[INFO][0m [29.03.2025 21:27:11] [test.c:91] : Testing find_all method for values > 70
+[32m[INFO][0m [29.03.2025 21:27:11] [test.c:94] : Found 7 items greater than 70
+List contents (7 items):
+[0]: 80
+[1]: 90
+[2]: 100
+[3]: 110
+[4]: 120
+[5]: 130
+[6]: 140
+
+[32m[INFO][0m [29.03.2025 21:27:11] [test.c:98] : Testing find with non-existing value 999
+[33m[WARN][0m [29.03.2025 21:27:11] [test.c:104] : Item with value 999 not found (expected)
+[32m[INFO][0m [29.03.2025 21:27:11] [test.c:108] : Testing find_all on empty list
+[32m[INFO][0m [29.03.2025 21:27:11] [test.c:111] : Result list has 0 items (expected 0)
+[32m[INFO][0m [29.03.2025 21:27:11] [test.c:114] : Testing list_add_at at position 3
+List contents (16 items):
+[0]: 0
+[1]: 10
+[2]: 20
+[3]: 345
+[4]: 30
+[5]: 40
+[6]: 50
+[7]: 60
+[8]: 70
+[9]: 80
+[10]: 90
+[11]: 100
+[12]: 110
+[13]: 120
+[14]: 130
+[15]: 140
+
+[32m[INFO][0m [29.03.2025 21:27:11] [test.c:121] : Freeing filtered list (but not its items)
+[32m[INFO][0m [29.03.2025 21:27:11] [test.c:126] : Removing element at index 5
+List contents (15 items):
+[0]: 0
+[1]: 10
+[2]: 20
+[3]: 345
+[4]: 30
+[5]: 50
+[6]: 60
+[7]: 70
+[8]: 80
+[9]: 90
+[10]: 100
+[11]: 110
+[12]: 120
+[13]: 130
+[14]: 140
+
+[32m[INFO][0m [29.03.2025 21:27:11] [test.c:130] : Removing last element
+List contents (14 items):
+[0]: 0
+[1]: 10
+[2]: 20
+[3]: 345
+[4]: 30
+[5]: 50
+[6]: 60
+[7]: 70
+[8]: 80
+[9]: 90
+[10]: 100
+[11]: 110
+[12]: 120
+[13]: 130
+
+[32m[INFO][0m [29.03.2025 21:27:11] [test.c:135] : Last item value: 130
+[32m[INFO][0m [29.03.2025 21:27:11] [test.c:137] : Freeing list
+[32m[INFO][0m [29.03.2025 21:27:11] [test.c:140] : Test completed successfully

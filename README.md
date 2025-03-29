@@ -5,8 +5,10 @@ A lightweight, flexible, and easy-to-use generic list implementation in C. This 
 ## Installation
 
 ```bash
-curl -o list.h https://raw.githubusercontent.com/DilemaFixer/list/main/logger.h
-curl -o list.c https://raw.githubusercontent.com/DilemaFixer/list/main/logger.c
+curl -o list.h https://raw.githubusercontent.com/DilemaFixer/list/main/list.h
+curl -o list.c https://raw.githubusercontent.com/DilemaFixer/list/main/list.c
+curl -o logger.c https://raw.githubusercontent.com/DilemaFixer/list/main/logger.c
+curl -o logger.h https://raw.githubusercontent.com/DilemaFixer/list/main/logger.h
 ```
 
 Include the header file in your code:

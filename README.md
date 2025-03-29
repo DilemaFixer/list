@@ -4,8 +4,6 @@ A lightweight, flexible, and easy-to-use generic list implementation in C. This 
 
 ## Installation
 
-Clone the repository and include it in your project:
-
 ```bash
 curl -o list.h https://raw.githubusercontent.com/DilemaFixer/list/main/logger.h
 curl -o list.c https://raw.githubusercontent.com/DilemaFixer/list/main/logger.c

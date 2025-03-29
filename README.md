@@ -2,23 +2,13 @@
 
 A lightweight, flexible, and easy-to-use generic list implementation in C. This library provides a dynamic array-based list that can store any type of data through void pointers.
 
-## Features
-
-- Dynamic resizing with automatic capacity management
-- Add/remove elements at any position
-- Powerful search capabilities with custom selector functions
-- Memory-efficient implementation
-- Comprehensive error handling with logging
-- Thread-safe operations (when used correctly)
-
 ## Installation
 
 Clone the repository and include it in your project:
 
 ```bash
-git clone https://github.com/yourusername/list.git
-cd list
-make
+curl -o list.h https://raw.githubusercontent.com/DilemaFixer/list/main/logger.h
+curl -o list.c https://raw.githubusercontent.com/DilemaFixer/list/main/logger.c
 ```
 
 Include the header file in your code:

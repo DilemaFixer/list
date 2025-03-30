@@ -12,10 +12,8 @@ A lightweight, generic dynamic list implementation in plain C. This library prov
 ### Linux & macOS
 
 ```bash
-# Create directory
 mkdir -p list && cd list
 
-# Download library files
 curl -o list.h https://raw.githubusercontent.com/DilemaFixer/list/main/list.h
 curl -o list.c https://raw.githubusercontent.com/DilemaFixer/list/main/list.c
 curl -o logger.h https://raw.githubusercontent.com/DilemaFixer/list/main/logger.h
@@ -44,9 +42,22 @@ Functions for creating, freeing, and managing the list structure.
 
 #### Functions
 
-- `list_t *new_list(size_t capacity)` - Creates a new list with the specified initial capacity
-- `void free_list(list_t *list)` - Frees the list and all its items
-- `void increase_list(list_t *list)` - Increases the capacity of the list by the factor specified in the list
+```c
+/**
+ * Creates a new list with the specified initial capacity
+ */
+list_t *new_list(size_t capacity);
+
+/**
+ * Frees the list and all its items
+ */
+void free_list(list_t *list);
+
+/**
+ * Increases the capacity of the list by the factor specified in the list
+ */
+void increase_list(list_t *list);
+```
 
 #### Example
 
@@ -67,9 +78,22 @@ Functions for adding items to the list at various positions.
 
 #### Functions
 
-- `void list_add(list_t *list, void *item)` - Adds an item to the end of the list
-- `void list_add_at(list_t *list, void *item, size_t index)` - Adds an item at the specified index
-- `void list_add_first(list_t *list, void *item)` - Adds an item at the beginning of the list
+```c
+/**
+ * Adds an item to the end of the list
+ */
+void list_add(list_t *list, void *item);
+
+/**
+ * Adds an item at the specified index
+ */
+void list_add_at(list_t *list, void *item, size_t index);
+
+/**
+ * Adds an item at the beginning of the list
+ */
+void list_add_first(list_t *list, void *item);
+```
 
 #### Example
 
@@ -102,9 +126,22 @@ Functions for removing items from various positions in the list.
 
 #### Functions
 
-- `void list_remove(list_t *list, size_t index)` - Removes an item at the specified index
-- `void list_remove_first(list_t *list)` - Removes the first item from the list
-- `void list_remove_last(list_t *list)` - Removes the last item from the list
+```c
+/**
+ * Removes an item at the specified index
+ */
+void list_remove(list_t *list, size_t index);
+
+/**
+ * Removes the first item from the list
+ */
+void list_remove_first(list_t *list);
+
+/**
+ * Removes the last item from the list
+ */
+void list_remove_last(list_t *list);
+```
 
 #### Example
 
@@ -128,8 +165,21 @@ Functions for searching items in the list based on custom criteria.
 
 #### Functions
 
-- `void *find(list_t *list, bool (*selector)(const void *item, size_t index, void *context), void *context)` - Finds the first item that matches the selector criteria
-- `list_t *find_all(list_t *list, bool (*selector)(const void *item, size_t index, void *context), void *context)` - Finds all items that match the selector criteria
+```c
+/**
+ * Finds the first item that matches the selector criteria
+ */
+void *find(list_t *list, 
+           bool (*selector)(const void *item, size_t index, void *context),
+           void *context);
+
+/**
+ * Finds all items that match the selector criteria
+ */
+list_t *find_all(list_t *list, 
+                 bool (*selector)(const void *item, size_t index, void *context),
+                 void *context);
+```
 
 #### Example
 

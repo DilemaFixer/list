@@ -30,7 +30,6 @@ curl -o list.h https://raw.githubusercontent.com/DilemaFixer/list/main/list.h
 curl -o list.c https://raw.githubusercontent.com/DilemaFixer/list/main/list.c
 curl -o logger.h https://raw.githubusercontent.com/DilemaFixer/list/main/logger.h
 curl -o logger.c https://raw.githubusercontent.com/DilemaFixer/list/main/logger.c
-curl -o test.c https://raw.githubusercontent.com/DilemaFixer/list/main/test.c
 ```
 
 ## 🔧 API and Usage Examples

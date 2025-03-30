@@ -1,136 +1,171 @@
-# Generic List Library
+# 📋 list
 
-A lightweight, flexible, and easy-to-use generic list implementation in C. This library provides a dynamic array-based list that can store any type of data through void pointers.
+![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
+![Version](https://img.shields.io/badge/version-1.0.0-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Language](https://img.shields.io/badge/language-C-orange)
 
-## Installation
+A lightweight, generic dynamic list implementation in plain C. This library provides a simple, yet efficient way to work with dynamic arrays of any type of data.
+
+## 📥 Installation
+
+### Linux & macOS
 
 ```bash
+# Create directory
+mkdir -p list && cd list
+
+# Download library files
 curl -o list.h https://raw.githubusercontent.com/DilemaFixer/list/main/list.h
 curl -o list.c https://raw.githubusercontent.com/DilemaFixer/list/main/list.c
-curl -o logger.c https://raw.githubusercontent.com/DilemaFixer/list/main/logger.c
 curl -o logger.h https://raw.githubusercontent.com/DilemaFixer/list/main/logger.h
+curl -o logger.c https://raw.githubusercontent.com/DilemaFixer/list/main/logger.c
+curl -o test.c https://raw.githubusercontent.com/DilemaFixer/list/main/test.c
 ```
 
-Include the header file in your code:
+### Windows
+
+```batch
+mkdir list
+cd list
+
+curl -o list.h https://raw.githubusercontent.com/DilemaFixer/list/main/list.h
+curl -o list.c https://raw.githubusercontent.com/DilemaFixer/list/main/list.c
+curl -o logger.h https://raw.githubusercontent.com/DilemaFixer/list/main/logger.h
+curl -o logger.c https://raw.githubusercontent.com/DilemaFixer/list/main/logger.c
+curl -o test.c https://raw.githubusercontent.com/DilemaFixer/list/main/test.c
+```
+
+## 🔧 API and Usage Examples
+
+### 📌 List Creation and Management
+
+Functions for creating, freeing, and managing the list structure.
+
+#### Functions
+
+- `list_t *new_list(size_t capacity)` - Creates a new list with the specified initial capacity
+- `void free_list(list_t *list)` - Frees the list and all its items
+- `void increase_list(list_t *list)` - Increases the capacity of the list by the factor specified in the list
+
+#### Example
 
 ```c
 #include "list.h"
+#include "logger.h"
+
+// Create a new list with initial capacity of 10
+list_t *my_list = new_list(10);
+
+// When done with the list, free it and all its items
+free_list(my_list);
 ```
 
-## API Reference
+### 📌 Adding Items
 
-### Creating and Destroying Lists
+Functions for adding items to the list at various positions.
 
-```c
-// Create a new list with initial capacity
-list_t *new_list(size_t capacity);
+#### Functions
 
-// Free list and all its elements
-void free_list(list_t *list);
-```
+- `void list_add(list_t *list, void *item)` - Adds an item to the end of the list
+- `void list_add_at(list_t *list, void *item, size_t index)` - Adds an item at the specified index
+- `void list_add_first(list_t *list, void *item)` - Adds an item at the beginning of the list
 
-### Adding Elements
-
-```c
-// Add an element to the end of the list
-void list_add(list_t *list, void *item);
-
-// Add an element at a specific index
-void list_add_at(list_t *list, void *item, size_t index);
-
-// Add an element at the beginning of the list
-void list_add_first(list_t *list, void *item);
-```
-
-### Removing Elements
-
-```c
-// Remove an element at a specific index
-void list_remove(list_t *list, size_t index);
-
-// Remove the last element
-void list_remove_last(list_t *list);
-
-// Remove the first element
-void list_remove_first(list_t *list);
-```
-
-### Searching
-
-```c
-// Find the first element that matches the selector
-void *find(list_t *list, 
-           bool (*selector)(const void *item, size_t index, void *context), 
-           void *context);
-
-// Find all elements that match the selector
-list_t *find_all(list_t *list, 
-                 bool (*selector)(const void *item, size_t index, void *context), 
-                 void *context);
-```
-
-## Usage Examples
-
-### Basic Usage
+#### Example
 
 ```c
 #include "list.h"
-#include <stdio.h>
+#include "logger.h"
 #include <stdlib.h>
 
-int main() {
-    // Create a new list
-    list_t *list = new_list(10);
-    
-    // Add some integers to the list
-    for (int i = 0; i < 5; i++) {
-        int *value = malloc(sizeof(int));
-        *value = i * 10;
-        list_add(list, value);
-    }
-    
-    // Access elements
-    for (size_t i = 0; i < list->count; i++) {
-        int *value = (int*)list->items[i];
-        printf("%d\n", *value);
-    }
-    
-    // Free the list when done
-    free_list(list);
-    
-    return 0;
-}
+// Create some items
+int *value1 = malloc(sizeof(int));
+int *value2 = malloc(sizeof(int));
+int *value3 = malloc(sizeof(int));
+*value1 = 10;
+*value2 = 20;
+*value3 = 30;
+
+// Add to the end of the list
+list_add(my_list, value1);
+
+// Add to the beginning of the list
+list_add_first(my_list, value2);
+
+// Add at a specific position (index 1)
+list_add_at(my_list, value3, 1);
 ```
 
-### Using Selector Functions
+### 📌 Removing Items
+
+Functions for removing items from various positions in the list.
+
+#### Functions
+
+- `void list_remove(list_t *list, size_t index)` - Removes an item at the specified index
+- `void list_remove_first(list_t *list)` - Removes the first item from the list
+- `void list_remove_last(list_t *list)` - Removes the last item from the list
+
+#### Example
 
 ```c
-// Define a selector function to find items greater than a threshold
+#include "list.h"
+#include "logger.h"
+
+// Remove the item at index 2
+list_remove(my_list, 2);
+
+// Remove the first item
+list_remove_first(my_list);
+
+// Remove the last item
+list_remove_last(my_list);
+```
+
+### 📌 Finding Items
+
+Functions for searching items in the list based on custom criteria.
+
+#### Functions
+
+- `void *find(list_t *list, bool (*selector)(const void *item, size_t index, void *context), void *context)` - Finds the first item that matches the selector criteria
+- `list_t *find_all(list_t *list, bool (*selector)(const void *item, size_t index, void *context), void *context)` - Finds all items that match the selector criteria
+
+#### Example
+
+```c
+#include "list.h"
+#include "logger.h"
+#include <stdbool.h>
+
+// Selector function for finding an item with a specific value
+bool find_value(const void *item, size_t index, void *context) {
+    const int *value = (const int *)item;
+    const int *target = (const int *)context;
+    return *value == *target;
+}
+
+// Find an item with value 20
+int target_value = 20;
+int *found_item = (int *)find(my_list, find_value, &target_value);
+
+// Selector for items greater than a threshold
 bool greater_than(const void *item, size_t index, void *context) {
-    const int *value = (const int*)item;
-    const int *threshold = (const int*)context;
+    const int *value = (const int *)item;
+    const int *threshold = (const int *)context;
     return *value > *threshold;
 }
 
-// Using find to get the first matching element
+// Find all items with values greater than 50
 int threshold = 50;
-int *found_item = (int*)find(list, greater_than, &threshold);
+list_t *filtered_list = find_all(my_list, greater_than, &threshold);
 
-// Using find_all to get all matching elements
-list_t *filtered_list = find_all(list, greater_than, &threshold);
+// Don't forget to free the filtered list when done
+// (but not its items, as they're still in the original list)
+free(filtered_list->items);
+free(filtered_list);
 ```
 
-## Notes on Memory Management
+## 📚 Dependencies
 
-- The list stores void pointers to items, so it works with any data type
-- When using `free_list()`, it frees both the list structure and all stored elements
-- If you need to keep the elements, use a custom function to free only the list structure
-- If you use `find_all()`, the resulting list contains references to the same elements
-
-## Error Handling
-
-The library uses a logging system for error reporting. Errors will be reported through the `logger.h` interface with appropriate error messages.
-
-## Thread Safety
-
-The library itself is not thread-safe. If you need to use the list in a multi-threaded environment, you need to implement your own synchronization mechanism.
+- [CSL (C Simple Logger)](https://github.com/DilemaFixer/CSL) - Simple logging library for C

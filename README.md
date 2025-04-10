@@ -9,27 +9,9 @@ A lightweight, generic dynamic list implementation in plain C. This library prov
 
 ## 📥 Installation
 
-### Linux & macOS
-
 ```bash
-mkdir -p list && cd list
-
 curl -o list.h https://raw.githubusercontent.com/DilemaFixer/list/main/list.h
 curl -o list.c https://raw.githubusercontent.com/DilemaFixer/list/main/list.c
-curl -o logger.h https://raw.githubusercontent.com/DilemaFixer/list/main/logger.h
-curl -o logger.c https://raw.githubusercontent.com/DilemaFixer/list/main/logger.c
-```
-
-### Windows
-
-```batch
-mkdir list
-cd list
-
-curl -o list.h https://raw.githubusercontent.com/DilemaFixer/list/main/list.h
-curl -o list.c https://raw.githubusercontent.com/DilemaFixer/list/main/list.c
-curl -o logger.h https://raw.githubusercontent.com/DilemaFixer/list/main/logger.h
-curl -o logger.c https://raw.githubusercontent.com/DilemaFixer/list/main/logger.c
 ```
 
 ## 🔧 API and Usage Examples
@@ -61,7 +43,6 @@ void increase_list(list_t *list);
 
 ```c
 #include "list.h"
-#include "logger.h"
 
 // Create a new list with initial capacity of 10
 list_t *my_list = new_list(10);
@@ -97,7 +78,6 @@ void list_add_first(list_t *list, void *item);
 
 ```c
 #include "list.h"
-#include "logger.h"
 #include <stdlib.h>
 
 // Create some items
@@ -145,7 +125,7 @@ void list_remove_last(list_t *list);
 
 ```c
 #include "list.h"
-#include "logger.h"
+
 
 // Remove the item at index 2
 list_remove(my_list, 2);
@@ -167,14 +147,14 @@ Functions for searching items in the list based on custom criteria.
 /**
  * Finds the first item that matches the selector criteria
  */
-void *find(list_t *list, 
+void *find(list_t *list,
            bool (*selector)(const void *item, size_t index, void *context),
            void *context);
 
 /**
  * Finds all items that match the selector criteria
  */
-list_t *find_all(list_t *list, 
+list_t *find_all(list_t *list,
                  bool (*selector)(const void *item, size_t index, void *context),
                  void *context);
 ```
@@ -183,7 +163,7 @@ list_t *find_all(list_t *list,
 
 ```c
 #include "list.h"
-#include "logger.h"
+
 #include <stdbool.h>
 
 // Selector function for finding an item with a specific value
@@ -213,7 +193,3 @@ list_t *filtered_list = find_all(my_list, greater_than, &threshold);
 free(filtered_list->items);
 free(filtered_list);
 ```
-
-## 📚 Dependencies
-
-- [CSL (C Simple Logger)](https://github.com/DilemaFixer/CSL) - Simple logging library for C

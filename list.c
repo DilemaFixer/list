@@ -1,19 +1,19 @@
 #include "list.h"
-#include "logger.h"
-
 #include <stdlib.h>
+#include <string.h>
 
 list_t *new_list(size_t capacity) {
   if (capacity == 0)
-    elog("Can't create list with zero capacity");
+    lfatal("Can't create list with zero capacity");
 
   list_t *list = (list_t *)malloc(sizeof(list_t));
   if (!list)
-    elog("Error allocation memory for list_t struct");
+    lfatal("Error allocation memory for list_t struct");
 
   list->items = malloc(sizeof(void *) * capacity);
   if (!list->items)
-    elog("Error allocation memory for list items ( list_t -> items (void**))");
+    lfatal(
+        "Error allocation memory for list items ( list_t -> items (void**))");
 
   list->last_item = list->items;
   list->count = 0;
@@ -40,11 +40,11 @@ void free_list(list_t *list) {
 
 void increase_list(list_t *list) {
   if (!list)
-    elog("Can`t increase list capacity by null ptr on it");
+    lfatal("Can`t increase list capacity by null ptr on it");
   if (list->factor == 0)
-    elog("Can't increase list capacity , factor is zero");
+    lfatal("Can't increase list capacity , factor is zero");
   if (!list->items)
-    elog("Can't increase list capacity , list itemas arr is null");
+    lfatal("Can't increase list capacity , list itemas arr is null");
 
   size_t new_capacity = list->factor * list->capacity;
   size_t size = sizeof(void *) * new_capacity;
@@ -60,11 +60,11 @@ void increase_list(list_t *list) {
 
 void list_add(list_t *list, void *item) {
   if (!list)
-    elog("Can't add item to list , ptr is null");
+    lfatal("Can't add item to list , ptr is null");
   if (!item)
-    elog("Can't add item to list , item is null");
+    lfatal("Can't add item to list , item is null");
   if (!list->items)
-    elog("Can't add item to list, list_t -> items is null");
+    lfatal("Can't add item to list, list_t -> items is null");
 
   if (list->count + 1 > list->capacity)
     increase_list(list);
@@ -76,13 +76,13 @@ void list_add(list_t *list, void *item) {
 
 void list_remove(list_t *list, size_t index) {
   if (!list)
-    elog("Can't remove item from list, list ptr is null");
+    lfatal("Can't remove item from list, list ptr is null");
   if (!list->items)
-    elog("Can't remove item from list , list_t -> items is null");
+    lfatal("Can't remove item from list , list_t -> items is null");
   if (list->count == 0)
-    elog("Can't remove item from list , list is empty");
+    lfatal("Can't remove item from list , list is empty");
   if (list->count < index)
-    elog("Can't remove items at index %zu , out of range", index);
+    lfatal("Can't remove items at index %zu , out of range", index);
 
   for (size_t i = index; i < list->count - 1; i++) {
     list->items[i] = list->items[i + 1];
@@ -97,27 +97,27 @@ void list_remove(list_t *list, size_t index) {
 
 void list_remove_first(list_t *list) {
   if (!list)
-    elog("Can't remove first at empty list");
+    lfatal("Can't remove first at empty list");
   if (list->count == 0)
-    elog("Can't remove first element at empty list");
+    lfatal("Can't remove first element at empty list");
   list_remove(list, 0);
 }
 
 void list_remove_last(list_t *list) {
   if (!list)
-    elog("Can't remove last item from list, list ptr is null");
+    lfatal("Can't remove last item from list, list ptr is null");
   if (list->count == 0)
-    elog("Can't remove last item from empty list");
+    lfatal("Can't remove last item from empty list");
   list_remove(list, list->count - 1);
 }
 
 void list_add_at(list_t *list, void *item, size_t index) {
   if (!list)
-    elog("Can't add element at %zu in null list", index);
+    lfatal("Can't add element at %zu in null list", index);
   if (!item)
-    elog("Can't add element at %zu in list , item is null", index);
+    lfatal("Can't add element at %zu in list , item is null", index);
   if (list->capacity < index + 1)
-    elog("Can't add element at %zu , index was out of range", index);
+    lfatal("Can't add element at %zu , index was out of range", index);
 
   if (list->count + 1 > list->capacity)
     increase_list(list);
@@ -132,9 +132,9 @@ void list_add_at(list_t *list, void *item, size_t index) {
 
 void list_add_first(list_t *list, void *item) {
   if (!list)
-    elog("Can't add element as first , list is null");
+    lfatal("Can't add element as first , list is null");
   if (!item)
-    elog("Can't add element as first , element is null");
+    lfatal("Can't add element as first , element is null");
 
   list_add_at(list, item, 0);
 }
@@ -155,12 +155,14 @@ void *find(list_t *list,
   return NULL;
 }
 
-list_t *find_all(list_t *list, bool (*selector)(const void *item, size_t index, void *context),
+list_t *find_all(list_t *list,
+                 bool (*selector)(const void *item, size_t index,
+                                  void *context),
                  void *context) {
   if (!list || !selector)
     return NULL;
 
-list_t *result = new_list(list->count > 0 ? list->count / 2 : 5);
+  list_t *result = new_list(list->count > 0 ? list->count / 2 : 5);
 
   for (size_t i = 0; i < list->count; i++) {
     void *item = list->items[i];
